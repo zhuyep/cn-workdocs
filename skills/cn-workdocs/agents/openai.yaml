@@ -1,0 +1,4 @@
+interface:
+  display_name: "CN WorkDocs"
+  short_description: "Evidence-aware Chinese formal writing workflows"
+  default_prompt: "Use $cn-workdocs to turn my source material into a concise, evidence-aware Chinese work document."

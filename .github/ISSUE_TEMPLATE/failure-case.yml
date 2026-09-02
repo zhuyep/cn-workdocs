@@ -1,0 +1,55 @@
+name: Failure case / 失败案例
+description: Report a reproducible writing, reasoning, or delivery failure / 提交可复现的写作、推理或交付问题
+title: "[Failure] "
+labels: ["failure-case"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for improving CN WorkDocs. Remove confidential, personal, copyrighted, and organization-identifying information before submitting.
+
+        感谢帮助改进 CN WorkDocs。提交前请删除机密信息、个人信息、受版权保护内容及可识别具体单位的信息。
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Mode / 使用模式
+      options:
+        - Draft / 起草
+        - Revise / 修改
+        - Compress / 压缩
+        - Audit / 审查
+        - Formatted delivery / 格式化交付
+    validations:
+      required: true
+  - type: textarea
+    id: sanitized-input
+    attributes:
+      label: Sanitized input / 脱敏输入
+      description: Provide the smallest input that reproduces the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed problem / 实际问题
+      description: Quote only the problematic excerpt and explain why it is wrong.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior / 预期行为
+    validations:
+      required: true
+  - type: input
+    id: agent
+    attributes:
+      label: Agent and model / 智能体与模型
+      placeholder: Codex, Claude Code, Cursor, etc.
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Data check / 数据检查
+      options:
+        - label: I removed confidential, personal, and organization-identifying information. / 我已删除机密、个人及单位识别信息。
+          required: true
