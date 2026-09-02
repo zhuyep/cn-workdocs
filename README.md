@@ -11,6 +11,20 @@
 
 `cn-workdocs` is an Agent Skill for Chinese enterprise and institutional writing. It helps an AI agent turn incomplete notes and source material into concise, evidence-aware reports, proposals, summaries, meeting minutes, and leadership speeches—without inventing facts or hiding uncertainty behind polished language.
 
+## 30-second example / 30 秒示例
+
+| Rough note / 原始记录 | CN WorkDocs result / 整理结果 |
+| --- | --- |
+| `先找一个部门试三个月，年底前看要不要推广。` | **建议判断**：先小范围试点，不直接全面推广。**已知时间**：一个部门、三个月，并以年底前形成是否推广的判断为目标。**缺口**：责任人、预算和效果基线标为 `[待补]`。**建议补充**：把越权访问或结果不可追溯列为试点停止条件。 |
+
+It does not merely make the sentence sound formal. It decides what is known, what is only asserted, what action follows, and what must remain unresolved. See the complete [pilot proposal](examples/pilot-proposal.md).
+
+它不是把句子换得更“正式”，而是分清已知事实、来源陈述、行动结论和必须保留的缺口。查看完整[试点方案示例](examples/pilot-proposal.md)。
+
+The Chinese example preserves the requested scope and timing. The bounded-pilot judgment and stop conditions are explicitly recommendations, while missing owners, budget, and baselines remain unresolved.
+
+![CN WorkDocs: 可决策、可追溯、可执行](assets/social-preview.jpg)
+
 ## Why this exists / 为什么做它
 
 普通提示词很容易生成“句句正确、没有一句能负责”的材料：事实与判断混在一起，缺失信息被自动补齐，建议只有方向没有责任人，篇幅很长但无法支持决策。
@@ -54,9 +68,23 @@ It is intentionally **not** a legal adviser or a GB/T 9704 formatting guarantee.
 
 ## Install / 安装
 
-Clone the repository and copy the skill into your agent's skill directory.
+已验证的 Codex 一键安装：
 
-克隆仓库，然后把 Skill 复制到智能体的技能目录：
+```bash
+npx skills add zhuyep/cn-workdocs --skill cn-workdocs -g -a codex -y
+```
+
+Verified one-command installation for Codex. The same open CLI supports other agents; change the `-a` target when needed. Browse the indexed skill on [skills.sh](https://skills.sh/zhuyep/cn-workdocs/cn-workdocs).
+
+Confirm that the public repository is discoverable before installing / 安装前可先确认公开仓库能被识别：
+
+```bash
+npx skills add zhuyep/cn-workdocs --list
+```
+
+如果不想使用安装器，也可以手动克隆并复制 Skill：
+
+Clone the repository and copy the skill into your agent's skill directory:
 
 ```bash
 git clone https://github.com/zhuyep/cn-workdocs.git
@@ -84,9 +112,10 @@ milestones, acceptance criteria, risks, and stop conditions.
 
 ## Example / 示例
 
-See [examples/pilot-proposal.md](examples/pilot-proposal.md) for a fictional but realistic example that turns six lines of rough notes into a decision-ready pilot proposal without inventing budget, performance, or policy claims.
+- [Pilot proposal / 试点方案](examples/pilot-proposal.md): turns six rough notes into a bounded decision without inventing budget, performance, or policy claims.
+- [Meeting minutes / 会议纪要](examples/meeting-minutes.md): separates decisions, tasks, proposals, and unresolved disagreements without manufacturing consensus.
 
-查看 [examples/pilot-proposal.md](examples/pilot-proposal.md)：示例将六行零散记录整理为可决策的试点方案，同时把缺失的预算、基线和责任人明确标记为 `[待补]`。
+两个示例都是虚构材料，但刻意保留真实工作中最容易出错的信息缺口、未核陈述和未形成共识。
 
 ## Repository layout / 仓库结构
 
@@ -109,6 +138,32 @@ tests/
 The skill is plain Markdown and has no model API dependency. It is designed for Codex and can be adapted to other coding agents that support folder-based Agent Skills. Tool names and installation paths may differ by product.
 
 Skill 本身是纯 Markdown，不调用模型 API。它主要面向 Codex，也可以适配支持目录式 Agent Skill 的其他编程智能体；不同产品的工具名称和安装路径可能不同。
+
+## Trust boundary / 信任边界
+
+- The installed skill bundle contains Markdown instructions, references, and optional interface metadata—no executable script or bundled API client. The skill package cannot send data by itself; the agent using it may still invoke tools allowed by that product and the user's task.
+- Skill 安装包只包含 Markdown 指令、参考资料和可选界面元数据；不含可执行脚本或 API 客户端，安装包本身不会发送数据。实际使用时，智能体仍可能按用户任务调用该产品允许的工具。
+- Repository CI checks required files, metadata, YAML, local Markdown links, and regression markers. Maintainers also run platform validation and an installation smoke test before releases. / 仓库 CI 检查必需文件、元数据、YAML、本地 Markdown 链接和回归标记；维护者在发布前另行运行平台校验与安装冒烟测试。
+
+## FAQ / 常见问题
+
+**它是公文生成器吗？ / Is this an official-document generator?**
+
+不是。它聚焦事实边界、证据链、决策逻辑和执行条件；法定文种、必选版式和 GB/T 9704 合规仍需专门工具、权威模板和人工复核。
+
+No. It focuses on evidence boundaries, decision logic, and executable action. Statutory document selection and mandatory layout compliance still require specialist tools, authoritative templates, and human review.
+
+**需要 API Key 吗？ / Does it need an API key?**
+
+不需要。Skill 本身是纯文本工作流；你所使用的智能体产品可能有自己的账号或计费要求。
+
+No. The skill is a plain-text workflow, although the agent product you use may have its own account or billing requirements.
+
+**能直接生成 Word/PDF 吗？ / Can it generate Word or PDF files?**
+
+它可以指导支持文档工具的智能体完成格式化交付和逐页质检，但不内置文档转换引擎。没有相应工具时，它会返回结构化文本。
+
+It can guide an agent with document tools through formatted delivery and page-by-page QA, but it does not bundle a conversion engine. Without those tools, it returns structured text.
 
 ## Contributing / 参与贡献
 

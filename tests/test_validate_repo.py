@@ -17,6 +17,20 @@ class ValidationTests(unittest.TestCase):
     def test_repository_is_valid(self) -> None:
         self.assertEqual(validate_repo.validate(), [])
 
+    def test_meeting_minutes_preserve_uncertainty(self) -> None:
+        example = SCRIPT.parents[1] / "examples" / "meeting-minutes.md"
+        text = example.read_text(encoding="utf-8")
+        for marker in (
+            "## 已形成的决定",
+            "## 行动项",
+            "## 建议行动（尚未形成决定）",
+            "## 未形成共识",
+            "[待补]",
+            "[待核]",
+        ):
+            with self.subTest(marker=marker):
+                self.assertIn(marker, text)
+
     def test_broken_relative_link_is_reported(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
