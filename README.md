@@ -3,6 +3,7 @@
 > **把零散材料变成可决策、可追溯、可执行的中文工作文档。**
 > Turn scattered evidence into decision-ready Chinese work documents.
 
+[![skills.sh](https://skills.sh/b/zhuyep/cn-workdocs)](https://skills.sh/zhuyep/cn-workdocs)
 [![Validate](https://github.com/zhuyep/cn-workdocs/actions/workflows/validate.yml/badge.svg)](https://github.com/zhuyep/cn-workdocs/actions/workflows/validate.yml)
 [![Release](https://img.shields.io/github/v/release/zhuyep/cn-workdocs)](https://github.com/zhuyep/cn-workdocs/releases)
 [![License](https://img.shields.io/github/license/zhuyep/cn-workdocs)](LICENSE)
