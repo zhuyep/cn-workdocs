@@ -31,6 +31,20 @@ class ValidationTests(unittest.TestCase):
             with self.subTest(marker=marker):
                 self.assertIn(marker, text)
 
+    def test_audit_example_catches_unsupported_claims(self) -> None:
+        example = SCRIPT.parents[1] / "examples" / "audit-unsupported-claims.md"
+        text = example.read_text(encoding="utf-8")
+        for marker in (
+            "## Audit findings / 审查发现",
+            "提升 40%",
+            "《知识管理办法（2026）》",
+            "不擅自改写",
+            "[待补]",
+            "[待核]",
+        ):
+            with self.subTest(marker=marker):
+                self.assertIn(marker, text)
+
     def test_broken_relative_link_is_reported(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

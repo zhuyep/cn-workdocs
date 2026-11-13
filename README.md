@@ -24,6 +24,15 @@ It does not merely make the sentence sound formal. It decides what is known, wha
 
 The Chinese example preserves the requested scope and timing. The bounded-pilot judgment and stop conditions are explicitly recommendations, while missing owners, budget, and baselines remain unresolved.
 
+### Catch unsupported claims / 抓住无依据结论
+
+| Draft sentence / 草稿原句 | Audit finding / 审查结果 |
+| --- | --- |
+| `本季度一次解决率提升 40%，按《知识管理办法》本月底必须全员上线。` | **无依据业绩**：材料里没有 40% 的口径、基期或来源，不能写成已核结果，应标 `[待核]` 或删掉数字。**编造政策**：未提供名为《知识管理办法》的文件，不得写成强制依据；全员上线期限改为建议并标 `[待补]`。审查只指出问题，不擅自改写成定稿。 |
+
+See the complete [audit example](examples/audit-unsupported-claims.md).  
+查看完整[打假审查示例](examples/audit-unsupported-claims.md)。
+
 ![CN WorkDocs: 可决策、可追溯、可执行](assets/social-preview.jpg)
 
 ## Why this exists / 为什么做它
@@ -115,6 +124,7 @@ milestones, acceptance criteria, risks, and stop conditions.
 
 - [Pilot proposal / 试点方案](examples/pilot-proposal.md): turns six rough notes into a bounded decision without inventing budget, performance, or policy claims.
 - [Meeting minutes / 会议纪要](examples/meeting-minutes.md): separates decisions, tasks, proposals, and unresolved disagreements without manufacturing consensus.
+- [Audit unsupported claims / 打假审查](examples/audit-unsupported-claims.md): catches an unsourced 40% performance claim and an invented policy citation, and stops short of silently rewriting the draft.
 
 两个示例都是虚构材料，但刻意保留真实工作中最容易出错的信息缺口、未核陈述和未形成共识。
 
