@@ -2,6 +2,10 @@
 
 All notable changes to CN WorkDocs are documented here.
 
+## [Unreleased]
+
+- Added a skills.sh discovery badge to the README header so the indexed install path is visible at first glance.
+
 ## [0.2.0] - 2026-09-02
 
 - Added a verified one-command install path and skills.sh discovery link.
