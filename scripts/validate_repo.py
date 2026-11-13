@@ -27,6 +27,7 @@ REQUIRED_FILES = (
     ROOT / "skills" / "cn-workdocs" / "references" / "delivery-and-qa.md",
     ROOT / "examples" / "pilot-proposal.md",
     ROOT / "examples" / "meeting-minutes.md",
+    ROOT / "examples" / "audit-unsupported-claims.md",
 )
 
 LINK_RE = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
