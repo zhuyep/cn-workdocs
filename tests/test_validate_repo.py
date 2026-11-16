@@ -45,6 +45,50 @@ class ValidationTests(unittest.TestCase):
             with self.subTest(marker=marker):
                 self.assertIn(marker, text)
 
+    def test_install_selfcheck_has_required_markers(self) -> None:
+        example = SCRIPT.parents[1] / "examples" / "install-60s-selfcheck.md"
+        text = example.read_text(encoding="utf-8")
+        for marker in (
+            "## Paste this / 粘贴这一段",
+            "使用 $cn-workdocs",
+            "客服知识助手讨论会",
+            "[待补]",
+            "[待核]",
+            "已形成的决定 ≠ 建议",
+            "11 月 30 日",
+            "60s 自检：通过",
+            "60s 自检：失败（缺：…）",
+            "meeting-minutes.md",
+        ):
+            with self.subTest(marker=marker):
+                self.assertIn(marker, text)
+
+    def test_readme_links_install_selfcheck(self) -> None:
+        readme = SCRIPT.parents[1] / "README.md"
+        text = readme.read_text(encoding="utf-8")
+        for marker in (
+            "装完 60 秒自检",
+            "examples/install-60s-selfcheck.md",
+            "examples/meeting-minutes.md",
+            "[待补]",
+            "[待核]",
+            "已形成的决定 ≠ 建议",
+            "60s 自检：通过",
+        ):
+            with self.subTest(marker=marker):
+                self.assertIn(marker, text)
+
+    def test_selfcheck_passes_on_published_minutes(self) -> None:
+        example = SCRIPT.parents[1] / "examples" / "meeting-minutes.md"
+        text = example.read_text(encoding="utf-8")
+        self.assertIn("[待补]", text)
+        self.assertIn("[待核]", text)
+        start = text.index("## 已形成的决定")
+        end = text.index("## 行动项")
+        decisions = text[start:end]
+        self.assertIn("50 份代表性文档", decisions)
+        self.assertNotIn("11 月 30 日", decisions)
+
     def test_broken_relative_link_is_reported(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
