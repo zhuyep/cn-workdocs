@@ -1,0 +1,10 @@
+{
+  "name": "cn-workdocs",
+  "version": "0.2.0",
+  "description": "Evidence-aware Agent Skill for Chinese work documents: draft, revise, compress, or audit reports, proposals, summaries, minutes, and speeches.",
+  "author": { "name": "zhuyep" },
+  "license": "MIT",
+  "keywords": ["agent-skill", "chinese", "workplace-writing", "evidence", "audit"],
+  "homepage": "https://github.com/zhuyep/cn-workdocs",
+  "repository": "https://github.com/zhuyep/cn-workdocs"
+}

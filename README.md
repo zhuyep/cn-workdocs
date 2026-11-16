@@ -12,6 +12,10 @@
 
 `cn-workdocs` is an Agent Skill for Chinese enterprise and institutional writing. It helps an AI agent turn incomplete notes and source material into concise, evidence-aware reports, proposals, summaries, meeting minutes, and leadership speeches—without inventing facts or hiding uncertainty behind polished language.
 
+Cursor 2.5+ can install from this repo with `/add-plugin` (not on the official Marketplace yet). Codex and other agents can keep using `npx skills add`.
+
+Cursor 2.5+ 可用 `/add-plugin` 从本仓安装（尚未上官方 Marketplace）；Codex 等仍可用 `npx skills add`。
+
 ## 30-second example / 30 秒示例
 
 | Rough note / 原始记录 | CN WorkDocs result / 整理结果 |
@@ -105,6 +109,18 @@ cp -R cn-workdocs/skills/cn-workdocs "${CODEX_HOME:-$HOME/.codex}/skills/"
 For project-local use, copy `skills/cn-workdocs` into the skill directory supported by your coding agent. The repository follows the standard `SKILL.md` layout and includes optional Codex interface metadata.
 
 如需项目内共享，可把 `skills/cn-workdocs` 放入所用智能体支持的项目级 Skill 目录。本仓库采用标准 `SKILL.md` 结构，并提供可选的 Codex 界面元数据。
+
+Cursor 2.5+（本仓已有 `.cursor-plugin/plugin.json`，技能在 `skills/cn-workdocs/`）可在新的 Agent 聊天里整行输入下面这条命令，从 GitHub 直接安装；它尚未出现在官方 Cursor Marketplace，自动补全也可能搜不到这条命令：
+
+```text
+/add-plugin cn-workdocs@https://github.com/zhuyep/cn-workdocs
+```
+
+Cursor 2.5+ (this repo already ships `.cursor-plugin/plugin.json` and `skills/cn-workdocs/`) can install directly from GitHub in a new Agent chat with the command above. It is not listed on the official Cursor Marketplace, and autocomplete may not suggest the command—paste the full line.
+
+装好后，在侧栏 Customize 里应能看到 cn-workdocs 技能。也可继续用上面的 `npx skills add`。
+
+After install, the skill should appear under Customize in the sidebar. You can still use `npx skills add` as above.
 
 ## Try it / 立即试用
 
