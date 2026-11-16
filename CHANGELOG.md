@@ -6,6 +6,7 @@ All notable changes to CN WorkDocs are documented here.
 
 - Added a skills.sh discovery badge to the README header so the indexed install path is visible at first glance.
 - Added a shareable Audit example that shows unsourced performance claims and invented policy citations being caught, without silently rewriting the draft.
+- Added a 60-second post-install self-check under Try it, with a paste-ready minutes prompt and a must-appear marker checklist.
 
 ## [0.2.0] - 2026-09-02
 
