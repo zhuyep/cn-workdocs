@@ -4,6 +4,7 @@ All notable changes to CN WorkDocs are documented here.
 
 ## [Unreleased]
 
+- Added a no-clone 60-second self-check command that prints 通过 or 失败 against the published minutes example and a known-bad draft.
 - Added Cursor 2.5+ /add-plugin install path via .cursor-plugin/plugin.json.
 - Added a skills.sh discovery badge to the README header so the indexed install path is visible at first glance.
 - Added a shareable Audit example that shows unsourced performance claims and invented policy citations being caught, without silently rewriting the draft.

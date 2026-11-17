@@ -45,6 +45,35 @@ Write exactly one of the following after you inspect the draft:
 - `60s 自检：通过` — all three must-appear checks passed, and none of the must-not-appear failures occurred.
 - `60s 自检：失败（缺：…）` — name the missing or violated check.
 
-A complete reference result is in the [meeting minutes example](meeting-minutes.md). Applying this checklist to that published example should read `60s 自检：通过`.
+A complete reference result is in the [meeting minutes example](meeting-minutes.md). Applying this checklist to that published example should read `60s 自检：通过`. A known-bad draft of the same notes is in the [failing minutes example](install-60s-selfcheck-fail.md).
 
-对照完整结果见[会议纪要示例](meeting-minutes.md)。用本清单核对该已发布示例，应得 `60s 自检：通过`。
+对照完整结果见[会议纪要示例](meeting-minutes.md)。用本清单核对该已发布示例，应得 `60s 自检：通过`。同一组速记的失败对照稿见[失败对照稿](install-60s-selfcheck-fail.md)。
+
+## No-clone check / 免安装核对
+
+You can score the published pass and fail drafts without cloning or starting an agent:
+
+不安装、也不开智能体会话，也可以用下面这条命令核对已发布的通过稿和失败对照稿：
+
+```bash
+curl -sL https://raw.githubusercontent.com/zhuyep/cn-workdocs/main/scripts/check_60s_selfcheck.py | python3 - --demo
+```
+
+Expected output / 预期输出：
+
+```text
+meeting-minutes.md: 60s 自检：通过
+install-60s-selfcheck-fail.md: 60s 自检：失败（缺：[待补]；[待核]；已形成的决定 ≠ 建议）
+```
+
+If you already have a local draft (including one from a live post-install session), score it with:
+
+若已有本地草稿（包括装完后真实会话的输出），可这样打分：
+
+```bash
+python3 scripts/check_60s_selfcheck.py path/to/draft.md
+```
+
+This command only scores the published fixture or a file you pass in. It does not replace a live post-install agent session.
+
+该命令只核对已发布示例或你提供的草稿文件，不能代替装完后的真实会话自检。

@@ -59,6 +59,8 @@ class ValidationTests(unittest.TestCase):
             "60s 自检：通过",
             "60s 自检：失败（缺：…）",
             "meeting-minutes.md",
+            "install-60s-selfcheck-fail.md",
+            "python3 - --demo",
         ):
             with self.subTest(marker=marker):
                 self.assertIn(marker, text)
@@ -74,6 +76,9 @@ class ValidationTests(unittest.TestCase):
             "[待核]",
             "已形成的决定 ≠ 建议",
             "60s 自检：通过",
+            "scripts/check_60s_selfcheck.py",
+            "python3 - --demo",
+            "examples/install-60s-selfcheck-fail.md",
         ):
             with self.subTest(marker=marker):
                 self.assertIn(marker, text)
@@ -139,6 +144,54 @@ class ValidationTests(unittest.TestCase):
             (root / "note.md").write_text("TODO: replace me\n", encoding="utf-8")
             errors = validate_repo.check_placeholders(root)
             self.assertEqual(len(errors), 1)
+
+
+class SixtySecondSelfcheckTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        script = SCRIPT.parents[1] / "scripts" / "check_60s_selfcheck.py"
+        spec = importlib.util.spec_from_file_location("check_60s_selfcheck", script)
+        assert spec and spec.loader
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        cls.check = module
+
+    def test_published_minutes_pass(self) -> None:
+        text = (SCRIPT.parents[1] / "examples" / "meeting-minutes.md").read_text(encoding="utf-8")
+        passed, line, missing = self.check.evaluate(text)
+        self.assertTrue(passed)
+        self.assertEqual(line, "60s 自检：通过")
+        self.assertEqual(missing, [])
+
+    def test_known_bad_draft_fails_all_three(self) -> None:
+        text = (SCRIPT.parents[1] / "examples" / "install-60s-selfcheck-fail.md").read_text(
+            encoding="utf-8"
+        )
+        passed, line, missing = self.check.evaluate(text)
+        self.assertFalse(passed)
+        self.assertEqual(
+            missing,
+            ["[待补]", "[待核]", "已形成的决定 ≠ 建议"],
+        )
+        self.assertEqual(
+            line,
+            "60s 自检：失败（缺：[待补]；[待核]；已形成的决定 ≠ 建议）",
+        )
+
+    def test_demo_prints_pass_and_fail_lines(self) -> None:
+        from io import StringIO
+        from contextlib import redirect_stdout
+
+        buf = StringIO()
+        with redirect_stdout(buf):
+            code = self.check.main(["--demo"])
+        self.assertEqual(code, 0)
+        out = buf.getvalue()
+        self.assertIn("meeting-minutes.md: 60s 自检：通过", out)
+        self.assertIn(
+            "install-60s-selfcheck-fail.md: 60s 自检：失败（缺：[待补]；[待核]；已形成的决定 ≠ 建议）",
+            out,
+        )
 
 
 if __name__ == "__main__":

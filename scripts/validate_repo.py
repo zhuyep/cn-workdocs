@@ -29,6 +29,7 @@ REQUIRED_FILES = (
     ROOT / "examples" / "meeting-minutes.md",
     ROOT / "examples" / "audit-unsupported-claims.md",
     ROOT / "examples" / "install-60s-selfcheck.md",
+    ROOT / "examples" / "install-60s-selfcheck-fail.md",
 )
 
 LINK_RE = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
