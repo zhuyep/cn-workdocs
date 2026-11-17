@@ -173,12 +173,34 @@ A complete reference result is in the [meeting minutes example](examples/meeting
 
 对照完整结果见[会议纪要示例](examples/meeting-minutes.md)。可打印的检查清单见[装完 60 秒自检页](examples/install-60s-selfcheck.md)。
 
+### No install: verify the published example / 免安装核对已发布示例
+
+You can confirm the checklist against the published pass and fail drafts without cloning or starting an agent:
+
+不安装、也不开智能体会话，也可以用下面这条命令核对已发布的通过稿和失败对照稿：
+
+```bash
+curl -sL https://raw.githubusercontent.com/zhuyep/cn-workdocs/main/scripts/check_60s_selfcheck.py | python3 - --demo
+```
+
+Expected output / 预期输出：
+
+```text
+meeting-minutes.md: 60s 自检：通过
+install-60s-selfcheck-fail.md: 60s 自检：失败（缺：[待补]；[待核]；已形成的决定 ≠ 建议）
+```
+
+This only scores the published fixture (and any draft you pass as a file). It does not replace a live post-install agent session.
+
+该命令只核对已发布示例（也可对你保存的草稿文件打分），不能代替装完后的真实会话自检。
+
 ## Example / 示例
 
 - [Pilot proposal / 试点方案](examples/pilot-proposal.md): turns six rough notes into a bounded decision without inventing budget, performance, or policy claims.
 - [Meeting minutes / 会议纪要](examples/meeting-minutes.md): separates decisions, tasks, proposals, and unresolved disagreements without manufacturing consensus.
 - [Audit unsupported claims / 打假审查](examples/audit-unsupported-claims.md): catches an unsourced 40% performance claim and an invented policy citation, and stops short of silently rewriting the draft.
 - [Install 60-second self-check / 装完 60 秒自检](examples/install-60s-selfcheck.md): a paste-ready minutes prompt and a must-appear checklist, so you can confirm the skill is working after install.
+- [Failing minutes draft / 失败对照稿](examples/install-60s-selfcheck-fail.md): the same notes written as a known-bad draft, so the no-clone checker can show a 失败 line.
 
 以上示例都是虚构材料，但刻意保留真实工作中最容易出错的信息缺口、未核陈述和未形成共识。
 
@@ -195,6 +217,7 @@ skills/cn-workdocs/
     └── delivery-and-qa.md
 examples/
 scripts/validate_repo.py
+scripts/check_60s_selfcheck.py
 tests/
 ```
 
